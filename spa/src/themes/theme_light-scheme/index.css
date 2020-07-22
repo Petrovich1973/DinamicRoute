@@ -1,0 +1,33 @@
+.color-error {
+    color: #d64141;
+}
+.color-warning {
+    color: #f9cc45;
+}
+.color-info {
+    color: #5eb4d3;
+}
+.color-success {
+    color: #49a75d;
+}
+
+.scheme-transparent {
+    background-color: transparent;
+    color: inherit;
+}
+.scheme-error {
+    background-color: #d64141;
+    color: #fff;
+}
+.scheme-warning {
+    background-color: #f9cc45;
+    color: #000;
+}
+.scheme-info {
+    background-color: #5eb4d3;
+    color: #fff;
+}
+.scheme-success {
+    background-color: #49a75d;
+    color: #fff;
+}
