@@ -1,5 +1,5 @@
 import React, {useReducer, useState, useEffect} from 'react'
-import {BrowserRouter as Router, Route, Switch, Link, Redirect} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch, NavLink, Redirect} from 'react-router-dom'
 
 import {ContextApp, initializeApp, reducerApp} from "./reducerApp"
 
@@ -31,8 +31,8 @@ function App() {
 
                 <header>
                     {name ? <h1>{name}</h1> : <span>waiting...</span>}
-                    <Link to={'/'}>Posts</Link>
-                    <Link to={'/topics'}>Topics</Link>
+                    <NavLink to={'/posts'}>Posts</NavLink>
+                    <NavLink to={'/topics'}>Topics</NavLink>
                 </header>
 
                 <Switch>

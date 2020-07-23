@@ -11,6 +11,7 @@ function Topics() {
     const {topics = [], topic = {}} = state
     const [topicId, setTopicId] = useState(null)
     const [waiting, setWaiting] = useState(false)
+    const [firstRequest, setFirstRequest] = useState(false)
 
     const history = useHistory()
 
@@ -32,6 +33,7 @@ function Topics() {
                     }
                 })
                 setWaiting(false)
+                setFirstRequest(true)
             }
             catch (e) {
 
@@ -90,45 +92,40 @@ function Topics() {
             </div>
             <div className="main">
                 <div style={{flex: 1}}>
-                    {!waiting ? (
+                    {waiting && <p>waiting...</p>}
+                    {topics.length ? (
                         <table className="table list" style={{width: '100%'}}>
                             <tbody>
-                            {topics.length ? (
-                                topics.map(({id, name, partitions}, idx) => {
-                                    return (
-                                        <tr
-                                            className={classnames(topicId === id && 'active')}
-                                            key={idx}
-                                            onClick={(e) => {
-                                                if (e.target.tagName !== "BUTTON") {
-                                                    handleClickEditTopic(id)
-                                                }
-                                            }}>
-                                            <td>{id}</td>
-                                            <td>
-                                                <div className="word-wrap" style={{minWidth: '200px'}}>{name}</div>
-                                            </td>
-                                            <td>{partitions}</td>
-                                            <td>
-                                                <button
-                                                    className="scheme-error"
-                                                    disabled={waiting}
-                                                    onClick={() => handleClickRemoveTopic(id)}>
-                                                    &#10006;
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    );
-                                })
-                            ) : (
-                                <tr>
-                                    <td className="align-center">Топики не получены</td>
-                                </tr>
-                            )}
+                            {topics.map(({id, name, partitions}, idx) => {
+                                return (
+                                    <tr
+                                        className={classnames(topicId === id && 'active')}
+                                        key={idx}
+                                        onClick={(e) => {
+                                            if (e.target.tagName !== "BUTTON") {
+                                                handleClickEditTopic(id)
+                                            }
+                                        }}>
+                                        <td>{id}</td>
+                                        <td>
+                                            <div className="word-wrap" style={{minWidth: '200px'}}>{name}</div>
+                                        </td>
+                                        <td>{partitions}</td>
+                                        <td>
+                                            <button
+                                                className="scheme-error"
+                                                disabled={waiting}
+                                                onClick={() => handleClickRemoveTopic(id)}>
+                                                &#10006;
+                                            </button>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                             </tbody>
                         </table>
                     ) : (
-                        <p>waiting...</p>
+                        firstRequest ? <p>Топиков нет</p> : null
                     )}
                 </div>
                 <Switch>

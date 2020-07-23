@@ -16,6 +16,17 @@ header h1 {
     text-transform: uppercase;
 }
 
+header a {
+    text-transform: uppercase;
+    color: #5593b2;
+}
+
+header .active {
+    color: #6c737a;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 section {
     overflow: hidden;
     margin: 0 auto;
@@ -36,6 +47,7 @@ input:not(disabled) {
     padding: 0 1rem;
     background-color: aliceblue;
     height: 2rem;
+    box-sizing: border-box;
 }
 
 input:focus:not(disabled) {
@@ -291,4 +303,25 @@ hr {
 .topicConfigList [disabled] {
     cursor: not-allowed;
     opacity: .4;
+}
+
+.editInputList {
+    padding: 1px;
+}
+
+.editInputList input {
+    display: block;
+    width: 100%;
+}
+
+.editInputList input:not(:hover):not(:focus) {
+    background-color: transparent;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 0;
+}
+
+.editInputList input.title:not(:hover):not(:focus) {
+    font-weight: bold;
+    font-size: 130%;
 }
