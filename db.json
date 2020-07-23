@@ -186,10 +186,10 @@
           "compression.type": "producer"
         },
         {
-          "delete.retention.ms": 86400000
+          "delete.retention.ms": "8640000056456"
         },
         {
-          "file.delete.delay.ms": 60000
+          "file.delete.delay.ms": "60000645645654"
         },
         {
           "flush.messages": 9223372036854776000
