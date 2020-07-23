@@ -111,7 +111,7 @@
           "flush.ms": 9223372036854776000
         },
         {
-          "follower.replication.throttled.replicas": ""
+          "follower.replication.throttled.replicas": "5435hhgfhg"
         },
         {
           "index.interval.bytes": 4096
