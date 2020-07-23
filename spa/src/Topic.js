@@ -3,11 +3,11 @@ import {ContextApp} from "./reducerApp"
 import {useParams} from 'react-router-dom'
 
 function Topic() {
-    const {state, dispatch} = useContext(ContextApp)
-    const {topic = {}} = state
-    const [waiting, setWaiting] = useState(false)
-    const [topicForm, setTopicForm] = useState({})
-    const [elementsWaiting, setElementsWaiting] = useState([])
+    const {state, dispatch} = useContext(ContextApp);
+    const {topic = {}} = state;
+    const [waiting, setWaiting] = useState(false);
+    const [topicForm, setTopicForm] = useState({});
+    const [elementsWaiting, setElementsWaiting] = useState([]);
 
     const {config = []} = topicForm
 

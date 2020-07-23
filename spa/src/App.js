@@ -12,9 +12,9 @@ import './themes/theme_light-scheme/index.css'
 
 
 function App() {
-    const [state, dispatch] = useReducer(reducerApp, initializeApp)
-    const [profile, setProfile] = useState(null)
-    const {name = null} = profile || {}
+    const [state, dispatch] = useReducer(reducerApp, initializeApp);
+    const [profile, setProfile] = useState(null);
+    const {name = null} = profile || {};
 
     useEffect(() => {
         const load = async () => {

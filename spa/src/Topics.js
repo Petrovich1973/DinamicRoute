@@ -7,11 +7,11 @@ import CreateTopic from "./CreateTopic";
 import Topic from "./Topic";
 
 function Topics() {
-    const {state, dispatch} = useContext(ContextApp)
-    const {topics = [], topic = {}} = state
-    const [topicId, setTopicId] = useState(null)
-    const [waiting, setWaiting] = useState(false)
-    const [firstRequest, setFirstRequest] = useState(false)
+    const {state, dispatch} = useContext(ContextApp);
+    const {topics = [], topic = {}} = state;
+    const [topicId, setTopicId] = useState(null);
+    const [waiting, setWaiting] = useState(false);
+    const [firstRequest, setFirstRequest] = useState(false);
 
     const history = useHistory()
 
