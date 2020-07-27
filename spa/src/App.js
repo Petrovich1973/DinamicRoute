@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Route, Switch, NavLink, Redirect} from 'react-r
 
 import {ContextApp, initializeApp, reducerApp} from "./reducerApp"
 
+import Users from "./pages/Users"
+import Roles from "./pages/Roles"
 
 import './App.css'
 import './themes/theme_light-scheme/index.css'
@@ -13,6 +15,7 @@ function App() {
 
     return (
         <ContextApp.Provider value={{dispatch, state}}>
+
             <Router>
 
                 <header>
@@ -24,14 +27,15 @@ function App() {
                 <Switch>
                     <Redirect exact from='/' to='/users'/>
                     <Route exact path={`/users**`}>
-                        <Posts/>
+                        <Users/>
                     </Route>
                     <Route exact path={`/roles**`}>
-                        <Topics/>
+                        <Roles/>
                     </Route>
                 </Switch>
 
             </Router>
+
         </ContextApp.Provider>
     )
 }

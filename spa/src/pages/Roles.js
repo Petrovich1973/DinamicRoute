@@ -2,11 +2,11 @@ import React, {useState, useEffect, useContext} from "react"
 import {ContextApp} from "../reducerApp"
 import {Switch, Route, useHistory} from "react-router-dom"
 import classnames from "classnames"
-import CreateUser from "./CreateUser"
+import CreateRole from "./CreateRole"
 
-function Users() {
+function Roles() {
     const {state, dispatch} = useContext(ContextApp)
-    const {users = []} = state
+    const {roles = []} = state
     const [waiting, setWaiting] = useState(false)
     const [firstRequest, setFirstRequest] = useState(false)
     const [topicId, setTopicId] = useState(null)
@@ -18,12 +18,12 @@ function Users() {
         (async () => {
             setWaiting(true)
             try {
-                const response = await fetch("http://localhost:4300/users")
+                const response = await fetch("http://localhost:4300/roles")
                 const result = await response.json()
                 dispatch({
                     type: 'updateApp',
                     payload: {
-                        users: result
+                        roles: result
                     }
                 })
                 setWaiting(false)
@@ -39,7 +39,7 @@ function Users() {
     }, [])
 
     const handleClickModeCreateTopic = () => {
-        history.push(`/users/createUser`)
+        history.push(`/roles/createRole`)
     }
 
     const handleClickEditTopic = id => {
@@ -56,16 +56,16 @@ function Users() {
                 <button className="scheme-info" onClick={handleClickModeCreateTopic}>
                     <span className="big">+</span>
                     &nbsp;&nbsp;
-                    <span className="uppercase">Добавить пользователя</span>
+                    <span className="uppercase">Добавить роль</span>
                 </button>
             </div>
             <div className="main">
                 <div style={{flex: 1}}>
                     {waiting && <p>waiting...</p>}
-                    {users.length ? (
+                    {roles.length ? (
                         <table className="table list" style={{width: '100%'}}>
                             <tbody>
-                            {users.map(({id, name, partitions}, idx) => {
+                            {roles.map(({id, name, partitions}, idx) => {
                                 return (
                                     <tr
                                         className={classnames(topicId === id && 'active')}
@@ -98,8 +98,8 @@ function Users() {
                     )}
                 </div>
                 <Switch>
-                    <Route exact path={`/users/createUser`}>
-                        <CreateUser/>
+                    <Route exact path={`/roles/createRole`}>
+                        <CreateRole/>
                     </Route>
                 </Switch>
             </div>
@@ -107,4 +107,4 @@ function Users() {
     );
 }
 
-export default Users;
+export default Roles;
