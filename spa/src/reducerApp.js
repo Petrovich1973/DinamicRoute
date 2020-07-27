@@ -6,15 +6,19 @@ export const initializeApp = {
     version: '1.0.0',
     waiting: false,
 
-    topics: [],
-    topic: {},
+    current: {
+        login: "administratorLogin",
+        auth: false,
+        addPermission: true,
+        updatePermission: true,
+        deletePermission: true,
+        checksumPermission: true,
+        showPermission: true
+    },
 
-    posts: [],
-    post: {},
+    users: [],
 
-    formPostEdit: {id: null, title: '', author: ''},
-    formPostAdd: {title: '', author: ''},
-    comments: []
+    roles: []
 }
 
 export const reducerApp = (state, action) => {
@@ -23,20 +27,6 @@ export const reducerApp = (state, action) => {
             return {
                 ...state,
                 ...action.payload
-            }
-        case 'updateFormEdit':
-            return {
-                ...state,
-                formPostEdit: {
-                    ...action.payload
-                }
-            }
-        case 'updateFormAdd':
-            return {
-                ...state,
-                formPostAdd: {
-                    ...action.payload
-                }
             }
         default:
             return state
