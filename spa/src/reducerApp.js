@@ -8,7 +8,7 @@ export const initializeApp = {
 
     current: {
         login: "administratorLogin",
-        auth: false,
+        auth: true,
         addPermission: true,
         updatePermission: true,
         deletePermission: true,

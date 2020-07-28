@@ -1,6 +1,6 @@
 header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem;
     line-height: 1;
@@ -8,8 +8,14 @@ header {
 }
 
 header > * {
-    display: block;
+    display: flex;
+    align-items: center;
     margin: 0 1rem;
+}
+header > * > * + * {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
 }
 
 header h1 {
