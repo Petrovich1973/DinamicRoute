@@ -3,12 +3,13 @@ import React from "react"
 export const ContextApp = React.createContext()
 
 export const initializeApp = {
-    version: '1.0.0',
+
     waiting: false,
 
     current: {
-        login: "administratorLogin",
-        auth: true,
+        version: '1.0.0',
+        login: "not login",
+        auth: false,
         addPermission: true,
         updatePermission: true,
         deletePermission: true,

@@ -1,20 +1,29 @@
+#root {
+    max-width: 1280px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
     line-height: 1;
+    border-bottom: 2px solid #eee;
     margin-bottom: 2rem;
 }
 
 header > * {
     display: flex;
     align-items: center;
-    margin: 0 1rem;
+}
+header > * > * {
+    margin: 0;
 }
 header > * > * + * {
-    display: flex;
-    align-items: center;
     margin-left: 1rem;
 }
 
@@ -156,6 +165,23 @@ hr {
 
 .align-bottom {
     vertical-align: bottom !important;
+}
+
+.authorization {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.nameApp {
+    position: relative;
+}
+.nameApp .version {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: block;
+    font-size: 60%;
+    font-weight: normal;
 }
 
 .main {

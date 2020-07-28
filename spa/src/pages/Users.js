@@ -3,13 +3,14 @@ import {ContextApp} from "../reducerApp"
 import {Switch, Route, useHistory} from "react-router-dom"
 import classnames from "classnames"
 import CreateUser from "./CreateUser"
+import UserDetail from "./UserDetail"
 
 function Users() {
     const {state, dispatch} = useContext(ContextApp)
     const {users = []} = state
     const [waiting, setWaiting] = useState(false)
     const [firstRequest, setFirstRequest] = useState(false)
-    const [topicId, setTopicId] = useState(null)
+    const [detailId, setDetailId] = useState(null)
 
     const history = useHistory()
 
@@ -43,7 +44,7 @@ function Users() {
     }
 
     const handleClickEditTopic = id => {
-        history.push(`/topics/${id}`)
+        history.push(`/users/${id}`)
     }
 
     const handleClickRemoveTopic = id => {
@@ -65,21 +66,18 @@ function Users() {
                     {users.length ? (
                         <table className="table list" style={{width: '100%'}}>
                             <tbody>
-                            {users.map(({id, name, partitions}, idx) => {
+                            {users.map(({id, login, roles}, idx) => {
                                 return (
                                     <tr
-                                        className={classnames(topicId === id && 'active')}
+                                        className={classnames(detailId === id && 'active')}
                                         key={idx}
                                         onClick={(e) => {
                                             if (e.target.tagName !== "BUTTON") {
                                                 handleClickEditTopic(id)
                                             }
                                         }}>
-                                        <td>{id}</td>
-                                        <td>
-                                            <div className="word-wrap" style={{minWidth: '200px'}}>{name}</div>
-                                        </td>
-                                        <td>{partitions}</td>
+                                        <td>{login}</td>
+                                        <td>{roles.join(', ')}</td>
                                         <td>
                                             <button
                                                 className="scheme-error"
@@ -100,6 +98,9 @@ function Users() {
                 <Switch>
                     <Route exact path={`/users/createUser`}>
                         <CreateUser/>
+                    </Route>
+                    <Route exact path={`/users/:id`}>
+                        <UserDetail/>
                     </Route>
                 </Switch>
             </div>

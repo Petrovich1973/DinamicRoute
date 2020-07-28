@@ -1,40 +1,60 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import {ContextApp} from "../reducerApp"
 
 const initializeStateAuthForm = {
     login: '',
     password: ''
 }
 
-const Authentication = ({onSubmit = Function}) => {
+const Authorization = () => {
+    const {state, dispatch} = useContext(ContextApp)
     const [authForm, setAuthForm] = useState(initializeStateAuthForm)
     const {login, password} = authForm
+
     const onChangeField = field => {
         setAuthForm({...authForm, ...field})
     }
+
+    const onSubmit = () => {
+        dispatch({
+            type: 'updateApp',
+            payload: {
+                current: {
+                    ...state.current,
+                    login: login,
+                    auth: true
+                }
+            }
+        })
+    }
+
     const onReset = () => {
         setAuthForm(initializeStateAuthForm)
     }
+
     return (
-        <div>
-            <h2>Authentication</h2>
+        <div className="authorization">
+            <h2>Authorization</h2>
             <div>
                 <label htmlFor="">Login</label>
                 <div>
                     <input type="text" value={login} onChange={e => onChangeField({login: e.target.value})}/>
                 </div>
             </div>
+            <div style={{height: '1rem'}}/>
             <div>
                 <label htmlFor="">Password</label>
                 <div>
                     <input type="password" value={password} onChange={e => onChangeField({password: e.target.value})}/>
                 </div>
             </div>
+            <div style={{height: '1rem'}}/>
             <div>
                 <button onClick={onSubmit}>LogIn</button>
-                <button onClick={onReset}>Reset</button>
+                <button className="scheme-perimeter" onClick={onReset}>Reset</button>
             </div>
         </div>
     )
 }
 
-export default Authentication
+export default Authorization
