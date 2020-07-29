@@ -4,9 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "json-server -w db.json -p 4300 -d 1750"
+    "start": "json-server -w db.json -p 4300 -d 1750",
+    "server-auth": "json-server -m json-server-auth db.json"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "json-server-auth": "^2.0.2"
+  }
 }

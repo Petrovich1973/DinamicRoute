@@ -10,11 +10,11 @@ export const initializeApp = {
         version: '1.0.0',
         login: "not login",
         auth: false,
-        addPermission: true,
-        updatePermission: true,
-        deletePermission: true,
-        checksumPermission: true,
-        showPermission: true
+        addPermission: false,
+        updatePermission: false,
+        deletePermission: false,
+        checksumPermission: false,
+        showPermission: false
     },
 
     users: [],
