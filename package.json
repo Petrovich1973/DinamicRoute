@@ -1,17 +1,18 @@
 {
-  "name": "json-server",
+  "name": "authentication",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "json-server -w db.json -p 4300 -d 1750",
-    "server-auth": "json-server -m json-server-auth db.json"
+    "server-auth": "json-server db.json -p 4300 -d 1750 -m ./node_modules/json-server-auth"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "json-server": "^0.16.1",
     "json-server-auth": "^2.0.2"
   }
 }
