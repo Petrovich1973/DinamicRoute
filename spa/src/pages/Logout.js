@@ -5,6 +5,7 @@ const Logout = () => {
     const {state, dispatch} = useContext(ContextApp)
 
     const handleClickLogout = async () => {
+        sessionStorage.removeItem('IgniteSecurity')
         dispatch({
             type: 'updateApp',
             payload: {

@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react'
+import React, {useReducer, useEffect, useState} from 'react'
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 
 import {ContextApp, initializeApp, reducerApp} from "./reducerApp"
@@ -17,9 +17,27 @@ import './themes/theme_light-scheme/index.css'
 
 function App() {
     const [state, dispatch] = useReducer(reducerApp, initializeApp)
+    const [flag, setFlag] = useState(false)
+
+    const current = JSON.parse(sessionStorage.getItem('IgniteSecurity'))
 
     const {auth, login, version} = state.current
 
+    useEffect(() => {
+
+        if (current && current.auth) {
+
+            dispatch({
+                type: 'updateApp',
+                payload: {current}
+            })
+        }
+        setFlag(true)
+        // eslint-disable-next-line
+    }, [])
+
+
+if(flag) {
     return (
         <ContextApp.Provider value={{dispatch, state}}>
 
@@ -46,6 +64,9 @@ function App() {
 
         </ContextApp.Provider>
     )
+} else {
+    return null
+}
 }
 
 export default App

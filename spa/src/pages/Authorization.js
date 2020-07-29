@@ -16,15 +16,18 @@ const Authorization = () => {
     }
 
     const onSubmit = () => {
+
+        const current = {
+            ...state.current,
+            login,
+            auth: true
+        }
+
+        sessionStorage.setItem('IgniteSecurity', JSON.stringify(current))
+
         dispatch({
             type: 'updateApp',
-            payload: {
-                current: {
-                    ...state.current,
-                    login: login,
-                    auth: true
-                }
-            }
+            payload: {current}
         })
     }
 
