@@ -5,14 +5,17 @@
   "main": "index.js",
   "scripts": {
     "start": "json-server -w db.json -p 4300 -d 1750",
-    "server-auth": "json-server db.json -p 4300 -d 1750 -m ./node_modules/json-server-auth"
+    "server-auth": "json-server db.json -p 4300 -d 1750 -m ./node_modules/json-server-auth",
+    "server-lowdb": "nodemon auth.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "json-server": "^0.16.1",
-    "json-server-auth": "^2.0.2"
+    "json-server-auth": "^2.0.2",
+    "lowdb": "^1.0.0"
   }
 }

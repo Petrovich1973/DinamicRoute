@@ -8,7 +8,6 @@
     "checksumPermission": true,
     "showPermission": true
   },
-  "us": [],
   "users": [
     {
       "id": 1,
@@ -52,6 +51,15 @@
         "SECURITY_ADMIN"
       ],
       "password": "bbrt745tfsd"
+    },
+    {
+      "login": "loginName7",
+      "roles": [
+        "SERVER_NODE",
+        "ADMIN_ACCESS"
+      ],
+      "password": "yuyuyiyuuidre",
+      "id": "1596115701616"
     }
   ],
   "roles": [
