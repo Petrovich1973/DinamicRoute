@@ -1,11 +1,15 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
+import {IconLogo, IconUser} from '../svg'
 
 const Header = ({mode = 'GUEST', login = null, version = null}) => {
 
     const logo = (
         <>
-            <h1>Ignite</h1>
+            <h1 className="logoApp">
+                <IconLogo size={36}/>
+                <span>Ignite</span>
+            </h1>
             <h3 className="nameApp">
                 Security console
                 {version && <span className="version">version {version}</span>}
@@ -32,9 +36,16 @@ const Header = ({mode = 'GUEST', login = null, version = null}) => {
                 </div>
                 <div>
                     <div style={{width: '2rem'}}/>
-                    <NavLink to={'/profile'}><small>Profile</small></NavLink>
-                    {login && <span>{login}</span>}
-                    <NavLink to={'/logout'}><small>Logout</small></NavLink>
+                    <NavLink to={'/profile'}>
+                        <small>Profile</small>
+                    </NavLink>
+                    {login && <>
+                        <IconUser size={24}/>
+                        <span style={{marginLeft: '.5rem'}}>{login}</span>
+                    </>}
+                    <NavLink to={'/logout'}>
+                        <small>Logout</small>
+                    </NavLink>
                 </div>
             </header>
         )

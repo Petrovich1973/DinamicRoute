@@ -11,6 +11,7 @@ const Authorization = () => {
     const {state, dispatch} = useContext(ContextApp)
     const [authForm, setAuthForm] = useState(initializeStateAuthForm)
     const {login, password} = authForm
+    const {current} = state
 
     const onChangeField = field => {
         setAuthForm({...authForm, ...field})
@@ -18,26 +19,33 @@ const Authorization = () => {
 
     const onSubmit = () => {
 
-        // const current = {
-        //     ...state.current,
-        //     login,
-        //     auth: true
-        // }
-        //
-        // sessionStorage.setItem('IgniteSecurity', JSON.stringify(current))
-        //
-        // dispatch({
-        //     type: 'updateApp',
-        //     payload: {current}
-        // })
-
         (async () => {
             axios('http://localhost:4300/login', {
                 method: 'POST',
-                data: {email: login, password}
+                data: {login, password}
             })
                 .then(response => {
-                    console.log(response)
+                    const {user, token} = response.data
+                    const result = {
+                        ...current,
+                        ...user,
+                        auth: true,
+                        addPermission: true,
+                        updatePermission: true,
+                        deletePermission: true,
+                        checksumPermission: true,
+                        showPermission: true
+                    }
+
+                    dispatch({
+                        type: 'updateApp',
+                        payload: {
+                            current: result
+                        }
+                    })
+
+                    localStorage.setItem('IgniteSecurity', JSON.stringify({user, token}))
+
                 }).catch(err => {
                 console.log(err)
             })
@@ -59,7 +67,7 @@ const Authorization = () => {
         //     axios('http://localhost:4300/roles', {
         //         method: 'GET',
         //         headers: {
-        //             Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlc2lnbnRvcmdAeWEucnUiLCJpYXQiOjE1OTYwNDg0NDgsImV4cCI6MTU5NjA1MjA0OCwic3ViIjoiNiJ9.AcGumjly1lRIKQ-KgmT7Ss-mte8eUtIfSs8gFqKVRBE'
+        //             authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlc2lnbnRvcmdAeWEucnUiLCJpYXQiOjE1OTYwNDg0NDgsImV4cCI6MTU5NjA1MjA0OCwic3ViIjoiNiJ9.AcGumjly1lRIKQ-KgmT7Ss-mte8eUtIfSs8gFqKVRBE'
         //         }
         //     })
         //         .then(response => {

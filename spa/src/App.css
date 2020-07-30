@@ -172,6 +172,14 @@ hr {
     flex-direction: column;
 }
 
+.logoApp {
+    display: flex;
+    align-items: center;
+}
+.logoApp span {
+    height: 36px;
+    margin-left: .5rem;
+}
 .nameApp {
     position: relative;
 }

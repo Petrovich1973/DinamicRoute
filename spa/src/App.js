@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 
 import {ContextApp, initializeApp, reducerApp} from "./reducerApp"
 
+import axios from 'axios'
+
 import Header from "./components/Header"
 import Authorization from "./pages/Authorization"
 import Users from "./pages/Users"
@@ -19,22 +21,53 @@ function App() {
     const [state, dispatch] = useReducer(reducerApp, initializeApp)
     const [flag, setFlag] = useState(false)
 
-    const current = JSON.parse(sessionStorage.getItem('IgniteSecurity'))
+    const {token = null, user = null} = JSON.parse(localStorage.getItem('IgniteSecurity')) || {}
 
     const {auth, login, version} = state.current
 
     useEffect(() => {
 
-        if (current && current.auth) {
+        onPingCall()
 
-            dispatch({
-                type: 'updateApp',
-                payload: {current}
-            })
-        }
-        setFlag(true)
         // eslint-disable-next-line
     }, [])
+
+    const onPingCall = async () => {
+
+        try {
+
+            axios.get('http://localhost:4300/ping', { headers: { 'Authorization': token } })
+                .then(response => {
+                    const result = {
+                        ...state.current,
+                        ...user,
+                        auth: true,
+                        addPermission: true,
+                        updatePermission: true,
+                        deletePermission: true,
+                        checksumPermission: true,
+                        showPermission: true
+                    }
+
+                    dispatch({
+                        type: 'updateApp',
+                        payload: {
+                            current: result
+                        }
+                    })
+                })
+                .catch(err => {
+                    console.log('err', err.response.data.message)
+                })
+
+
+        } catch (err) {
+
+            console.log('err', err)
+
+        }
+        setFlag(true)
+    }
 
 
 if(flag) {

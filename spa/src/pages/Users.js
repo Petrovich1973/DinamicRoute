@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from "react"
 import {ContextApp} from "../reducerApp"
 import {Switch, Route, useHistory} from "react-router-dom"
+import axios from "axios"
 import classnames from "classnames"
 import CreateUser from "./CreateUser"
 import UserDetail from "./UserDetail"
@@ -17,10 +18,11 @@ function Users() {
     useEffect(() => {
 
         (async () => {
+            const {token = null} = JSON.parse(localStorage.getItem('IgniteSecurity')) || {}
             setWaiting(true)
             try {
-                const response = await fetch("http://localhost:4300/users")
-                const result = await response.json()
+                const response = await axios.get("http://localhost:4300/users", { headers: { 'Authorization': token } })
+                const result = await response.data
                 dispatch({
                     type: 'updateApp',
                     payload: {

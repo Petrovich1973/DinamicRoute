@@ -2,18 +2,12 @@ import React, {useContext} from 'react'
 import {ContextApp} from "../reducerApp"
 
 const Logout = () => {
-    const {state, dispatch} = useContext(ContextApp)
+    const {dispatch} = useContext(ContextApp)
 
     const handleClickLogout = async () => {
-        sessionStorage.removeItem('IgniteSecurity')
+        localStorage.removeItem('IgniteSecurity')
         dispatch({
-            type: 'updateApp',
-            payload: {
-                current: {
-                    ...state.current,
-                    auth: false
-                }
-            }
+            type: 'resetCurrent'
         })
     }
 

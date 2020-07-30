@@ -29,6 +29,11 @@ export const reducerApp = (state, action) => {
                 ...state,
                 ...action.payload
             }
+        case 'resetCurrent':
+            return {
+                ...state,
+                current: initializeApp.current
+            }
         default:
             return state
     }
