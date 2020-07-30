@@ -1,4 +1,5 @@
 import React, {useState, useContext} from 'react'
+import {useHistory} from "react-router-dom"
 import axios from 'axios'
 import {ContextApp} from "../reducerApp"
 
@@ -12,6 +13,8 @@ const Authorization = () => {
     const [authForm, setAuthForm] = useState(initializeStateAuthForm)
     const {login, password} = authForm
     const {current} = state
+
+    const history = useHistory()
 
     const onChangeField = field => {
         setAuthForm({...authForm, ...field})
@@ -45,6 +48,8 @@ const Authorization = () => {
                     })
 
                     localStorage.setItem('IgniteSecurity', JSON.stringify({user, token}))
+
+                    history.push('/profile')
 
                 }).catch(err => {
                 console.log(err)

@@ -80,13 +80,12 @@ if(flag) {
 
                 <Switch>
 
+                    <Route path={`/login`} component={Authorization}/>
                     {auth && <Route path={`/users`} component={Users}/>}
                     {auth && <Route path={`/roles`} component={Roles}/>}
                     {auth && <Route path={`/profile`} component={Profile}/>}
                     {auth && <Route path={`/logout`} component={Logout}/>}
-                    {auth && <Redirect from={`/login`} to={`/profile`}/>}
                     {auth && <Route component={NotFound}/>}
-                    {!auth && <Route path={`/login`} component={Authorization}/>}
                     {!auth && <Redirect to={`/login`}/>}
 
                     <Route component={NotFound}/>
