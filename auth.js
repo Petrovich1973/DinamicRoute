@@ -18,7 +18,7 @@ low(adapter)
 
         app.get("/ping", (req, res) => {
             // random endpoint so that the client can call something
-            res.json({ "msg": "pong" })
+            setTimeout(() => res.json({ "msg": "pong" }), 2000)
         })
 
         // login
@@ -86,19 +86,6 @@ low(adapter)
     .then(() => {
         app.listen(port, () => console.log(`Server starting on port: ${port}`))
     })
-
-// const isVerify = (token) => {
-//
-//     let result = null
-//
-//     try {
-//         result = jwt.verify(token, secret)
-//     } catch(err) {
-//         // err
-//     }
-//
-//     return result
-// }
 
 // Auth middleware
 app.use((req, res, next) => {

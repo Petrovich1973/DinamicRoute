@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from "react"
 import {ContextApp} from "../reducerApp"
 import {Switch, Route, useHistory} from "react-router-dom"
+import axios from "axios"
 import classnames from "classnames"
 import CreateRole from "./CreateRole"
 
@@ -16,9 +17,10 @@ function Roles() {
     useEffect(() => {
 
         (async () => {
+            const {token = null} = JSON.parse(localStorage.getItem('IgniteSecurity')) || {}
             setWaiting(true)
             try {
-                const response = await fetch("http://localhost:4300/roles")
+                const response = await fetch("http://localhost:4300/roles", { headers: { 'Authorization': token } })
                 const result = await response.json()
                 dispatch({
                     type: 'updateApp',

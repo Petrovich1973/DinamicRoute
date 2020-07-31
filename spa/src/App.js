@@ -55,9 +55,11 @@ function App() {
                             current: result
                         }
                     })
+                    setFlag(true)
                 })
                 .catch(err => {
                     console.log('err', err.response.data.message)
+                    setFlag(true)
                 })
 
 
@@ -66,7 +68,7 @@ function App() {
             console.log('err', err)
 
         }
-        setFlag(true)
+
     }
 
 
@@ -97,7 +99,7 @@ if(flag) {
         </ContextApp.Provider>
     )
 } else {
-    return null
+    return (<div/>)
 }
 }
 
