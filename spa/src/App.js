@@ -99,7 +99,7 @@ if(flag) {
         </ContextApp.Provider>
     )
 } else {
-    return (<div/>)
+    return (<div className="align-center">waiting...</div>)
 }
 }
 

@@ -4,13 +4,14 @@ import {Switch, Route, useHistory} from "react-router-dom"
 import axios from "axios"
 import classnames from "classnames"
 import CreateRole from "./CreateRole"
+import RoleDetail from "./RoleDetail"
 
 function Roles() {
     const {state, dispatch} = useContext(ContextApp)
     const {roles = []} = state
     const [waiting, setWaiting] = useState(false)
     const [firstRequest, setFirstRequest] = useState(false)
-    const [topicId, setTopicId] = useState(null)
+    const [detailId, setDetailId] = useState(null)
 
     const history = useHistory()
 
@@ -20,8 +21,10 @@ function Roles() {
             const {token = null} = JSON.parse(localStorage.getItem('IgniteSecurity')) || {}
             setWaiting(true)
             try {
-                const response = await fetch("http://localhost:4300/roles", { headers: { 'Authorization': token } })
-                const result = await response.json()
+                const response = await axios.get("http://localhost:4300/roles", {
+                    headers: {'Authorization': token}
+                })
+                const result = await response.data
                 dispatch({
                     type: 'updateApp',
                     payload: {
@@ -45,11 +48,32 @@ function Roles() {
     }
 
     const handleClickEditTopic = id => {
-        history.push(`/topics/${id}`)
+        history.push(`/roles/${id}`)
     }
 
     const handleClickRemoveTopic = id => {
         console.log(id)
+    }
+
+    const viewListRow = (name, perms, listKeys,) => {
+        if(!listKeys.length) return
+        return (
+            <>
+                <div><strong>{name}</strong></div>
+                <ul>
+                    {listKeys.map((key, i) => {
+                        const content = {
+                            __html: perms[key].join('<br/>')
+                        }
+                        return (
+                            <li key={i}>
+                                <strong>{key}:</strong> <span dangerouslySetInnerHTML={content}/>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </>
+        )
     }
 
     return (
@@ -67,21 +91,35 @@ function Roles() {
                     {roles.length ? (
                         <table className="table list" style={{width: '100%'}}>
                             <tbody>
-                            {roles.map(({id, name, partitions}, idx) => {
+                            {roles.map(({id, name, permissions = {}}, idx) => {
+                                const {
+                                    cachePerms = {},
+                                    taskPerms = {},
+                                    servicePerms = {},
+                                    systemPerms = {}
+                                } = permissions
+                                const cachePermsKeys = Object.keys(cachePerms)
+                                const taskPermsKeys = Object.keys(taskPerms)
+                                const servicePermsKeys = Object.keys(servicePerms)
+                                const systemPermsKeys = Object.keys(systemPerms)
+                                const readOnly = cachePermsKeys.length + taskPermsKeys.length + servicePermsKeys.length + systemPermsKeys.length
                                 return (
                                     <tr
-                                        className={classnames(topicId === id && 'active')}
+                                        className={classnames(detailId === id && 'active')}
                                         key={idx}
                                         onClick={(e) => {
                                             if (e.target.tagName !== "BUTTON") {
-                                                handleClickEditTopic(id)
+                                                handleClickEditTopic(name)
                                             }
                                         }}>
-                                        <td>{id}</td>
+                                        <td>{name}</td>
                                         <td>
-                                            <div className="word-wrap" style={{minWidth: '200px'}}>{name}</div>
+                                            {viewListRow('cachePerms', cachePerms, cachePermsKeys)}
+                                            {viewListRow('taskPerms', taskPerms, taskPermsKeys)}
+                                            {viewListRow('servicePerms', servicePerms, servicePermsKeys)}
+                                            {viewListRow('systemPerms', systemPerms, systemPermsKeys)}
+                                            {!readOnly && <span>Роль неизменяемая</span>}
                                         </td>
-                                        <td>{partitions}</td>
                                         <td>
                                             <button
                                                 className="scheme-error"
@@ -102,6 +140,9 @@ function Roles() {
                 <Switch>
                     <Route exact path={`/roles/createRole`}>
                         <CreateRole/>
+                    </Route>
+                    <Route exact path={`/roles/:id`}>
+                        <RoleDetail/>
                     </Route>
                 </Switch>
             </div>

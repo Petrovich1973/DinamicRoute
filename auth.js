@@ -17,7 +17,6 @@ low(adapter)
     .then(db => {
 
         app.get("/ping", (req, res) => {
-            // random endpoint so that the client can call something
             setTimeout(() => res.json({ "msg": "pong" }), 2000)
         })
 
