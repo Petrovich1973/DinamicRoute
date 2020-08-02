@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "json-server -w db.json -p 4300 -d 1750",
-    "server-auth": "json-server db.json -p 4300 -d 1750 -m ./node_modules/json-server-auth",
-    "server-lowdb": "nodemon auth.js"
+    "start": "nodemon auth.js",
+    "server-auth": "json-server db.json -p 4300 -d 1750 -m ./node_modules/json-server-auth"
   },
   "keywords": [],
   "author": "",

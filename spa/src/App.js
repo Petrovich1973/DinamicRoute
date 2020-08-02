@@ -83,11 +83,11 @@ if(flag) {
                 <Switch>
 
                     <Route path={`/login`} component={Authorization}/>
+                    {auth && <Redirect exact from={`/`} to={`/profile`}/>}
+                    {auth && <Route path={`/profile`} component={Profile}/>}
                     {auth && <Route path={`/users`} component={Users}/>}
                     {auth && <Route path={`/roles`} component={Roles}/>}
-                    {auth && <Route path={`/profile`} component={Profile}/>}
                     {auth && <Route path={`/logout`} component={Logout}/>}
-                    {auth && <Route component={NotFound}/>}
                     {!auth && <Redirect to={`/login`}/>}
 
                     <Route component={NotFound}/>
