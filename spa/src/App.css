@@ -380,3 +380,50 @@ hr {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.main > * {
+    transition: all 1s;
+}
+.main > * + * {
+    width: 0;
+    overflow: hidden;
+}
+
+.shift > *:first-child {
+    margin-left: -100%;
+}
+.shift > *:last-child{
+    width: 100%;
+}
+
+.table_detail_role {
+    border-spacing: 6px;
+}
+.table_detail_role > tbody > tr + tr > td {
+    border-top: 6px solid #ccc;
+}
+.table_detail_role tbody tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, .07);
+}
+.table_detail_role td {
+    padding: .3rem .6rem;
+}
+.table_detail_role tr:hover > td {
+    color: white;
+    background-color: rgba(0, 0, 0, .4);
+}
+.table_detail_role td label {
+    background-color: black;
+    color: white;
+    font-size: 65%;
+    line-height: 1;
+    padding: .2rem .3rem;
+    display: inline-flex;
+    align-items: center;
+    border-radius: .2rem;
+    white-space: nowrap;
+}
+.table_detail_role td label:after {
+    content: '. | \2716';
+    cursor: pointer;
+}

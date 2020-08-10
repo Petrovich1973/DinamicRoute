@@ -78,6 +78,11 @@ function Roles() {
         )
     }
 
+    const onShift = value => {
+        setDetailId(value)
+        if(!value) setTimeout(() => history.push(`/roles`), 1000)
+    }
+
     return (
         <section className="align-center">
             <div className="panel">
@@ -86,8 +91,9 @@ function Roles() {
                     &nbsp;&nbsp;
                     <span className="uppercase">Добавить роль</span>
                 </button>
+                {detailId}
             </div>
-            <div className="main">
+            <div className={classnames("main", {'shift': detailId})}>
                 <div style={{flex: 1}}>
                     {waiting && <p>waiting...</p>}
                     {roles.length ? (
@@ -152,7 +158,7 @@ function Roles() {
                 </div>
                 <Switch>
                     <Route exact path={`/roles/createRole`}>
-                        <CreateRole/>
+                        <CreateRole onShift={onShift}/>
                     </Route>
                     <Route exact path={`/roles/:id`}>
                         <RoleDetail/>
