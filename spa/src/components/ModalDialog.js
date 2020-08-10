@@ -6,7 +6,7 @@ const ModalDialog = ({
                          children = <div/>,
                          className = '',
                          colorScheme = '',
-                         onClose = Function
+                         onClose = () => console.log('ModalDialog onClose')
                      }) => {
     return (
         <div className="modal">

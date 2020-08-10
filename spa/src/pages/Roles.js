@@ -56,18 +56,20 @@ function Roles() {
     }
 
     const viewListRow = (name, perms, listKeys,) => {
-        if(!listKeys.length) return
+        if (!listKeys.length) return
         return (
             <>
                 <div><strong>{name}</strong></div>
-                <ul>
+                <ul className="list__row_subList">
                     {listKeys.map((key, i) => {
                         const content = {
                             __html: perms[key].join('<br/>')
                         }
                         return (
                             <li key={i}>
-                                <strong>{key}:</strong> <span dangerouslySetInnerHTML={content}/>
+                                <strong>{key}:</strong>
+                                &nbsp;
+                                <span dangerouslySetInnerHTML={content}/>
                             </li>
                         )
                     })}
@@ -102,10 +104,13 @@ function Roles() {
                                 const taskPermsKeys = Object.keys(taskPerms)
                                 const servicePermsKeys = Object.keys(servicePerms)
                                 const systemPermsKeys = Object.keys(systemPerms)
-                                const readOnly = cachePermsKeys.length + taskPermsKeys.length + servicePermsKeys.length + systemPermsKeys.length
+                                const readOnly = cachePermsKeys.length +
+                                    taskPermsKeys.length +
+                                    servicePermsKeys.length +
+                                    systemPermsKeys.length
                                 return (
                                     <tr
-                                        className={classnames(detailId === id && 'active')}
+                                        className={classnames(detailId === name && 'active')}
                                         key={idx}
                                         onClick={(e) => {
                                             if (e.target.tagName !== "BUTTON") {
@@ -114,10 +119,18 @@ function Roles() {
                                         }}>
                                         <td>{name}</td>
                                         <td>
-                                            {viewListRow('cachePerms', cachePerms, cachePermsKeys)}
-                                            {viewListRow('taskPerms', taskPerms, taskPermsKeys)}
-                                            {viewListRow('servicePerms', servicePerms, servicePermsKeys)}
-                                            {viewListRow('systemPerms', systemPerms, systemPermsKeys)}
+                                            {viewListRow('cachePerms',
+                                                cachePerms,
+                                                cachePermsKeys)}
+                                            {viewListRow('taskPerms',
+                                                taskPerms,
+                                                taskPermsKeys)}
+                                            {viewListRow('servicePerms',
+                                                servicePerms,
+                                                servicePermsKeys)}
+                                            {viewListRow('systemPerms',
+                                                systemPerms,
+                                                systemPermsKeys)}
                                             {!readOnly && <span>Роль неизменяемая</span>}
                                         </td>
                                         <td>

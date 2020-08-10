@@ -7,6 +7,9 @@
     "start": "nodemon auth.js",
     "server-auth": "json-server db.json -p 4300 -d 1750 -m ./node_modules/json-server-auth"
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

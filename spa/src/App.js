@@ -37,7 +37,7 @@ function App() {
         try {
 
             axios.get('http://localhost:4300/ping', { headers: { 'Authorization': token } })
-                .then(response => {
+                .then(() => {
                     const result = {
                         ...state.current,
                         ...user,

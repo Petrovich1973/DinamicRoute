@@ -365,3 +365,18 @@ hr {
     font-weight: bold;
     font-size: 130%;
 }
+
+.list__row_subList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.list__row_subList > li {
+    display: flex;
+    align-items: center;
+}
+.list__row_subList > li > * {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
