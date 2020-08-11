@@ -1,8 +1,7 @@
 import React, {useState, useEffect, useContext} from "react"
 import {ContextApp} from "../reducerApp"
-import {Switch, Route, useHistory} from "react-router-dom"
+import {Switch, Route, useHistory, Link} from "react-router-dom"
 import axios from "axios"
-import classnames from "classnames"
 import CreateUser from "./CreateUser"
 import UserDetail from "./UserDetail"
 
@@ -11,7 +10,6 @@ function Users() {
     const {users = []} = state
     const [waiting, setWaiting] = useState(false)
     const [firstRequest, setFirstRequest] = useState(false)
-    const [detailId, setDetailId] = useState(null)
 
     const history = useHistory()
 
@@ -21,7 +19,7 @@ function Users() {
             const {token = null} = JSON.parse(localStorage.getItem('IgniteSecurity')) || {}
             setWaiting(true)
             try {
-                const response = await axios.get("http://localhost:4300/users", { headers: { 'Authorization': token } })
+                const response = await axios.get("http://localhost:4300/users", {headers: {'Authorization': token}})
                 const result = await response.data
                 dispatch({
                     type: 'updateApp',
@@ -32,8 +30,8 @@ function Users() {
                 setWaiting(false)
                 setFirstRequest(true)
             }
-            catch (e) {
-
+            catch (err) {
+                console.error(err)
             }
 
         })()
@@ -41,71 +39,60 @@ function Users() {
         // eslint-disable-next-line
     }, [])
 
-    const handleClickModeCreateTopic = () => {
-        history.push(`/users/createUser`)
-    }
-
-    const handleClickEditTopic = id => {
-        history.push(`/users/${id}`)
-    }
-
     const handleClickRemoveTopic = id => {
         console.log(id)
     }
 
     return (
         <section className="align-center">
-            <div className="panel">
-                <button className="scheme-info" onClick={handleClickModeCreateTopic}>
-                    <span className="big">+</span>
-                    &nbsp;&nbsp;
-                    <span className="uppercase">Добавить пользователя</span>
-                </button>
-            </div>
-            <div className="main">
-                <div style={{flex: 1}}>
-                    {waiting && <p>waiting...</p>}
-                    {users.length ? (
-                        <table className="table list" style={{width: '100%'}}>
-                            <tbody>
-                            {users.map(({id, login, roles}, idx) => {
-                                return (
-                                    <tr
-                                        className={classnames(detailId === id && 'active')}
-                                        key={idx}
-                                        onClick={(e) => {
-                                            if (e.target.tagName !== "BUTTON") {
-                                                handleClickEditTopic(id)
-                                            }
-                                        }}>
-                                        <td>{login}</td>
-                                        <td>{roles.join(', ')}</td>
-                                        <td>
-                                            <button
-                                                className="scheme-error"
-                                                disabled={waiting}
-                                                onClick={() => handleClickRemoveTopic(id)}>
-                                                &#10006;
-                                            </button>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                            </tbody>
-                        </table>
-                    ) : (
-                        firstRequest ? <p>Топиков нет</p> : null
-                    )}
-                </div>
-                <Switch>
-                    <Route exact path={`/users/createUser`}>
-                        <CreateUser/>
-                    </Route>
-                    <Route exact path={`/users/:id`}>
-                        <UserDetail/>
-                    </Route>
-                </Switch>
-            </div>
+            <nav>
+                <Link to={'/users'}>List Users</Link>
+                <Link to={'/users/createUser'} className="scheme-info">Create User</Link>
+            </nav>
+            <Switch>
+                <Route exact path={`/users`}>
+                    <>
+                        <h3>List Roles</h3>
+                        {waiting && <p>waiting...</p>}
+                        {users.length ? (
+                            <table className="table list" style={{width: 'auto'}}>
+                                <tbody>
+                                {users.map(({id, login, roles}, idx) => {
+                                    return (
+                                        <tr
+                                            key={idx}
+                                            onClick={(e) => {
+                                                if (e.target.tagName !== "BUTTON") {
+                                                    history.push(`/users/${id}`)
+                                                }
+                                            }}>
+                                            <td>{login}</td>
+                                            <td>{roles.join(', ')}</td>
+                                            <td>
+                                                <button
+                                                    className="scheme-error"
+                                                    disabled={waiting}
+                                                    onClick={() => handleClickRemoveTopic(id)}>
+                                                    &#10006;
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                                </tbody>
+                            </table>
+                        ) : (
+                            firstRequest ? <p>no users</p> : null
+                        )}
+                    </>
+                </Route>
+                <Route exact path={`/users/createUser`}>
+                    <CreateUser/>
+                </Route>
+                <Route exact path={`/users/:id`}>
+                    <UserDetail/>
+                </Route>
+            </Switch>
         </section>
     );
 }

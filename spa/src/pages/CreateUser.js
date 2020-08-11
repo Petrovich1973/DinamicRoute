@@ -2,7 +2,11 @@ import React from 'react'
 
 const CreateUser = () => {
     return (
-        <div>CreateUser</div>
+        <section className="align-center">
+
+            <h3>Create User</h3>
+
+        </section>
     )
 }
 

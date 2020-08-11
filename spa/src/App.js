@@ -20,6 +20,7 @@ import './themes/theme_light-scheme/index.css'
 function App() {
     const [state, dispatch] = useReducer(reducerApp, initializeApp)
     const [flag, setFlag] = useState(false)
+    const [errorMessage, setErrorMessage] = useState(null)
 
     const {token = null, user = null} = JSON.parse(localStorage.getItem('IgniteSecurity')) || {}
 
@@ -36,7 +37,7 @@ function App() {
 
         try {
 
-            axios.get('http://localhost:4300/ping', { headers: { 'Authorization': token } })
+            axios.get('http://localhost:4300/ping', {headers: {'Authorization': token}})
                 .then(() => {
                     const result = {
                         ...state.current,
@@ -58,8 +59,14 @@ function App() {
                     setFlag(true)
                 })
                 .catch(err => {
-                    console.log('err', err.response.data.message)
-                    setFlag(true)
+                    const {response} = {...err}
+                    if (response) {
+                        setErrorMessage(response.data.message)
+                        setTimeout(() => setFlag(true), 2000)
+                        // setFlag(true)
+                    } else if (!response) {
+                        setErrorMessage('ERR_CONNECTION_REFUSED')
+                    }
                 })
 
 
@@ -72,35 +79,39 @@ function App() {
     }
 
 
-if(flag) {
-    return (
-        <ContextApp.Provider value={{dispatch, state}}>
+    if (flag) {
+        return (
+            <ContextApp.Provider value={{dispatch, state}}>
 
-            <Router>
+                <Router>
 
-                <Header {...{mode: auth ? 'USER' : 'GUEST', login, version}}/>
+                    <Header {...{mode: auth ? 'USER' : 'GUEST', login, version}}/>
 
-                <Switch>
+                    <Switch>
 
-                    <Route path={`/login`} component={Authorization}/>
-                    {auth && <Redirect exact from={`/`} to={`/profile`}/>}
-                    {auth && <Route path={`/profile`} component={Profile}/>}
-                    {auth && <Route path={`/users`} component={Users}/>}
-                    {auth && <Route path={`/roles`} component={Roles}/>}
-                    {auth && <Route path={`/logout`} component={Logout}/>}
-                    {!auth && <Redirect to={`/login`}/>}
+                        <Route path={`/login`} component={Authorization}/>
 
-                    <Route component={NotFound}/>
+                        {auth && <Redirect exact from={`/`} to={`/profile`}/>}
+                        {auth && <Route path={`/profile`} component={Profile}/>}
+                        {auth && <Route path={`/users`} component={Users}/>}
+                        {auth && <Route path={`/roles`} component={Roles}/>}
+                        {auth && <Route path={`/logout`} component={Logout}/>}
+                        {!auth && <Redirect to={`/login`}/>}
 
-                </Switch>
+                        <Route component={NotFound}/>
 
-            </Router>
+                    </Switch>
 
-        </ContextApp.Provider>
-    )
-} else {
+                </Router>
+
+            </ContextApp.Provider>
+        )
+    } else if (errorMessage) {
+        return (<div
+            style={{padding: '3rem 6rem'}}
+            className="align-center scheme-error">{errorMessage}</div>)
+    }
     return (<div className="align-center">waiting...</div>)
-}
 }
 
 export default App

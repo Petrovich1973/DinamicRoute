@@ -17,7 +17,7 @@ low(adapter)
     .then(db => {
 
         app.get("/ping", (req, res) => {
-            setTimeout(() => res.json({ "msg": "pong" }), 2000)
+            setTimeout(() => res.json({ "message": "OK" }), 2000)
         })
 
         // login
@@ -44,6 +44,14 @@ low(adapter)
         // roles
         app.get('/roles', (req, res) => {
             const result = db.get('roles')
+
+            res.send(result)
+        })
+
+        app.get('/roles/:id', async (req, res) => {
+            const result = await db.get('roles')
+                .find({ id: +req.params.id })
+                .value()
 
             res.send(result)
         })
@@ -103,7 +111,7 @@ app.use((req, res, next) => {
         console.log("decoded", decoded)
     } catch (err) {
         // Catch the JWT Expired or Invalid errors
-        return res.status(401).json({ "message": err.message })
+        return res.status(401).json({ "message": 'Вы не авторизованы!'/*err.message*/ })
     }
 
     // next middleware

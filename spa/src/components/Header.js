@@ -41,7 +41,7 @@ const Header = ({mode = 'GUEST', login = null, version = null}) => {
                     </NavLink>
                     {login && <>
                         <IconUser size={24}/>
-                        <span style={{marginLeft: '.5rem'}}>{login}</span>
+                        <small style={{marginLeft: '.5rem'}}>{login}</small>
                     </>}
                     <NavLink to={'/logout'}>
                         <small>Logout</small>

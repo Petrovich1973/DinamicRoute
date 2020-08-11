@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon auth.js",
-    "server-auth": "json-server db.json -p 4300 -d 1750 -m ./node_modules/json-server-auth"
+    "start": "nodemon auth.js"
   },
   "eslintConfig": {
     "extends": "react-app"

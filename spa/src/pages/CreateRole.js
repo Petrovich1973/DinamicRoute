@@ -1,18 +1,11 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 
-const CreateRole = ({
-                        onShift = () => {
-                        }
-                    }) => {
-
-    useEffect(() => {
-        onShift('create')
-    }, [])
+const CreateRole = () => {
 
     return (
-        <div>
-            <h3>CreateUser</h3>
-            <button onClick={() => onShift(null)}>Cancel</button>
+        <section className="align-center">
+
+            <h3>Create Role</h3>
 
             <table className="table_detail_role">
                 <tbody>
@@ -131,7 +124,7 @@ const CreateRole = ({
                 </tr>
                 </tbody>
             </table>
-        </div>
+        </section>
     )
 }
 

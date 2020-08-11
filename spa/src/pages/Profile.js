@@ -2,7 +2,12 @@ import React from 'react'
 
 const Profile = () => {
     return (
-        <div>Profile</div>
+        <section className="align-center">
+            <h3>Profile</h3>
+            <div>
+                Здесь инфрмация о пользователе
+            </div>
+        </section>
     )
 }
 

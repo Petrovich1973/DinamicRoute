@@ -2,7 +2,11 @@ import React from 'react'
 
 const UserDetail = () => {
     return (
-        <div>UserDetail</div>
+        <section className="align-center">
+
+            <h3>Detail User</h3>
+
+        </section>
     )
 }
 
