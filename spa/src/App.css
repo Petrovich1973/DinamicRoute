@@ -1,15 +1,30 @@
+#root {
+    max-width: 1280px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem;
     line-height: 1;
+    border-bottom: 2px solid #eee;
     margin-bottom: 2rem;
 }
 
 header > * {
-    display: block;
-    margin: 0 1rem;
+    display: flex;
+    align-items: center;
+}
+header > * > * {
+    margin: 0;
+}
+header > * > * + * {
+    margin-left: 1rem;
 }
 
 header h1 {
@@ -30,11 +45,28 @@ header .active {
 section {
     overflow: hidden;
     margin: 0 auto;
-    max-width: 1200px;
+    width: 1200px;
+    max-width: 100%;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav a {
+    margin: 0 .5rem;
+    padding: .3rem .6rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 76%;
+    border: 1px solid #000;
+    color: #000;
 }
 
 table {
     border-collapse: collapse;
+    max-width: 100%;
 }
 
 th, td {
@@ -150,6 +182,31 @@ hr {
 
 .align-bottom {
     vertical-align: bottom !important;
+}
+
+.authorization {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.logoApp {
+    display: flex;
+    align-items: center;
+}
+.logoApp span {
+    height: 36px;
+    margin-left: .5rem;
+}
+.nameApp {
+    position: relative;
+}
+.nameApp .version {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: block;
+    font-size: 60%;
+    font-weight: normal;
 }
 
 .main {
@@ -324,4 +381,77 @@ hr {
 .editInputList input.title:not(:hover):not(:focus) {
     font-weight: bold;
     font-size: 130%;
+}
+
+.list__row_subList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.list__row_subList > li {
+    display: flex;
+    align-items: center;
+}
+.list__row_subList > li > * {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.main > * {
+    transition: all 600ms;
+}
+.main > * + * {
+    width: 0;
+    overflow: hidden;
+}
+
+.shift > *:first-child {
+    margin-left: -100%;
+}
+.shift > *:last-child{
+    width: 100%;
+}
+
+.table_detail_role {
+    border-spacing: 6px;
+    display: inline-table;
+}
+.table_detail_role > tbody > tr + tr > td {
+    border-top: 6px solid #ccc;
+}
+.table_detail_role tbody tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, .07);
+}
+.table_detail_role td {
+    padding: .3rem .6rem;
+}
+.table_detail_role table {
+    width: 100%;
+}
+.table_detail_role tr:hover > td {
+    color: white;
+    background-color: rgba(0, 0, 0, .4);
+}
+.table_detail_role td nobr {
+    display: block;
+    white-space: normal;
+    word-break: break-all;
+
+}
+.table_detail_role td label {
+    background-color: black;
+    color: white;
+    font-size: 65%;
+    line-height: 1;
+    padding: .2rem .3rem;
+    margin: .2rem;
+    display: inline-flex;
+    align-items: center;
+    border-radius: .2rem;
+    white-space: nowrap;
+}
+.table_detail_role td label:after {
+    content: '. | \2716';
+    cursor: pointer;
 }

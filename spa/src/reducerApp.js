@@ -3,18 +3,23 @@ import React from "react"
 export const ContextApp = React.createContext()
 
 export const initializeApp = {
-    version: '1.0.0',
+
     waiting: false,
 
-    topics: [],
-    topic: {},
+    current: {
+        version: '1.0.0',
+        login: "not login",
+        auth: false,
+        addPermission: false,
+        updatePermission: false,
+        deletePermission: false,
+        checksumPermission: false,
+        showPermission: false
+    },
 
-    posts: [],
-    post: {},
+    users: [],
 
-    formPostEdit: {id: null, title: '', author: ''},
-    formPostAdd: {title: '', author: ''},
-    comments: []
+    roles: []
 }
 
 export const reducerApp = (state, action) => {
@@ -24,19 +29,10 @@ export const reducerApp = (state, action) => {
                 ...state,
                 ...action.payload
             }
-        case 'updateFormEdit':
+        case 'resetCurrent':
             return {
                 ...state,
-                formPostEdit: {
-                    ...action.payload
-                }
-            }
-        case 'updateFormAdd':
-            return {
-                ...state,
-                formPostAdd: {
-                    ...action.payload
-                }
+                current: initializeApp.current
             }
         default:
             return state

@@ -1,356 +1,250 @@
 {
-  "topicSceme": {
-    "name": "topicName",
-    "partitions": 3,
-    "replication-factor": 2,
-    "replica-assignment": "",
-    "config": [
-      {
-        "cleanup.policy": "delete"
-      },
-      {
-        "compression.type": "producer"
-      },
-      {
-        "delete.retention.ms": 86400000
-      },
-      {
-        "file.delete.delay.ms": 60000
-      },
-      {
-        "flush.messages": 9223372036854776000
-      },
-      {
-        "flush.ms": 9223372036854776000
-      },
-      {
-        "follower.replication.throttled.replicas": ""
-      },
-      {
-        "index.interval.bytes": 4096
-      },
-      {
-        "leader.replication.throttled.replicas": ""
-      },
-      {
-        "max.compaction.lag.ms": 9223372036854776000
-      },
-      {
-        "max.message.bytes": 1048588
-      },
-      {
-        "message.downconversion.enable": true
-      },
-      {
-        "message.format.version": "2.5-IV0"
-      },
-      {
-        "message.timestamp.difference.max.ms": 9223372036854776000
-      },
-      {
-        "message.timestamp.type": "CreateTime"
-      },
-      {
-        "min.cleanable.dirty.ratio": 0.5
-      },
-      {
-        "min.compaction.lag.ms": 0
-      },
-      {
-        "min.insync.replicas": 2
-      },
-      {
-        "preallocate": false
-      },
-      {
-        "retention.bytes": -1
-      },
-      {
-        "retention.ms": 604800000
-      },
-      {
-        "segment.bytes": 1073741824
-      },
-      {
-        "segment.index.bytes": 10485760
-      },
-      {
-        "segment.jitter.ms": 0
-      },
-      {
-        "segment.ms": 604800000
-      },
-      {
-        "unclean.leader.election.enable": false
-      }
-    ]
+  "current": {
+    "login": "administrator",
+    "auth": true,
+    "addPermission": true,
+    "updatePermission": true,
+    "deletePermission": true,
+    "checksumPermission": true,
+    "showPermission": true
   },
-  "topics": [
-    {
-      "name": "topicName1",
-      "partitions": "1",
-      "replication-factor": 2,
-      "replica-assignment": "",
-      "config": [
-        {
-          "cleanup.policy": "delete"
-        },
-        {
-          "compression.type": "producer"
-        },
-        {
-          "delete.retention.ms": 86400000
-        },
-        {
-          "file.delete.delay.ms": 60000
-        },
-        {
-          "flush.messages": 9223372036854776000
-        },
-        {
-          "flush.ms": 9223372036854776000
-        },
-        {
-          "follower.replication.throttled.replicas": "5435hhgfhg"
-        },
-        {
-          "index.interval.bytes": 4096
-        },
-        {
-          "leader.replication.throttled.replicas": ""
-        },
-        {
-          "max.compaction.lag.ms": 9223372036854776000
-        },
-        {
-          "max.message.bytes": 1048588
-        },
-        {
-          "message.downconversion.enable": true
-        },
-        {
-          "message.format.version": "2.5-IV0"
-        },
-        {
-          "message.timestamp.difference.max.ms": 9223372036854776000
-        },
-        {
-          "message.timestamp.type": "CreateTime"
-        },
-        {
-          "min.cleanable.dirty.ratio": 0.5
-        },
-        {
-          "min.compaction.lag.ms": 0
-        },
-        {
-          "min.insync.replicas": 2
-        },
-        {
-          "preallocate": false
-        },
-        {
-          "retention.bytes": -1
-        },
-        {
-          "retention.ms": 604800000
-        },
-        {
-          "segment.bytes": 1073741824
-        },
-        {
-          "segment.index.bytes": 10485760
-        },
-        {
-          "segment.jitter.ms": 0
-        },
-        {
-          "segment.ms": 604800000
-        },
-        {
-          "unclean.leader.election.enable": false
-        }
-      ],
-      "id": 1
-    },
-    {
-      "name": "topicName2",
-      "partitions": "2",
-      "replication-factor": 2,
-      "replica-assignment": "",
-      "config": [
-        {
-          "cleanup.policy": "delete"
-        },
-        {
-          "compression.type": "producer"
-        },
-        {
-          "delete.retention.ms": "8640000056456"
-        },
-        {
-          "file.delete.delay.ms": "60000645645654"
-        },
-        {
-          "flush.messages": 9223372036854776000
-        },
-        {
-          "flush.ms": 9223372036854776000
-        },
-        {
-          "follower.replication.throttled.replicas": ""
-        },
-        {
-          "index.interval.bytes": 4096
-        },
-        {
-          "leader.replication.throttled.replicas": ""
-        },
-        {
-          "max.compaction.lag.ms": 9223372036854776000
-        },
-        {
-          "max.message.bytes": 1048588
-        },
-        {
-          "message.downconversion.enable": true
-        },
-        {
-          "message.format.version": "2.5-IV0"
-        },
-        {
-          "message.timestamp.difference.max.ms": 9223372036854776000
-        },
-        {
-          "message.timestamp.type": "CreateTime"
-        },
-        {
-          "min.cleanable.dirty.ratio": 0.5
-        },
-        {
-          "min.compaction.lag.ms": 0
-        },
-        {
-          "min.insync.replicas": 2
-        },
-        {
-          "preallocate": false
-        },
-        {
-          "retention.bytes": -1
-        },
-        {
-          "retention.ms": 604800000
-        },
-        {
-          "segment.bytes": 1073741824
-        },
-        {
-          "segment.index.bytes": 10485760
-        },
-        {
-          "segment.jitter.ms": 0
-        },
-        {
-          "segment.ms": 604800000
-        },
-        {
-          "unclean.leader.election.enable": false
-        }
-      ],
-      "id": 2
-    }
-  ],
-  "posts": [
+  "users": [
     {
       "id": 1,
-      "title": "json-server 1",
-      "author": "java"
+      "login": "loginName1",
+      "roles": [
+        "SERVER_NODE",
+        "ADMIN_ACCESS"
+      ],
+      "password": "fgdfgefg"
     },
     {
       "id": 2,
-      "title": "json-server 2",
-      "author": "javascript"
+      "login": "loginName2",
+      "roles": [
+        "CLIENT"
+      ],
+      "password": "jhgjhdfgdf"
     },
     {
       "id": 3,
-      "title": "json-server 3",
-      "author": "python"
+      "login": "loginName3",
+      "roles": [
+        "MAINTENANCE_ADMIN",
+        "ROLE_WITHOUT_PERMS"
+      ],
+      "password": "43rgfgf"
     },
     {
       "id": 4,
-      "title": "json-server 4",
-      "author": "ruby"
+      "login": "loginName4",
+      "roles": [
+        "ALLOW_ALL"
+      ],
+      "password": "fgdfgefg"
     },
     {
       "id": 5,
-      "title": "json-server 5",
-      "author": "C++"
+      "login": "loginName4",
+      "roles": [
+        "SHOULD_CHANGE_PASSWORD",
+        "SECURITY_ADMIN"
+      ],
+      "password": "bbrt745tfsd"
+    },
+    {
+      "login": "loginName7",
+      "roles": [
+        "SERVER_NODE",
+        "ADMIN_ACCESS"
+      ],
+      "password": "yuyuyiyuuidre",
+      "id": "1596115701616"
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "name": "SERVER_NODE",
+      "dfltAll": false,
+      "permissions": {
+        "cachePerms": {
+          "*": [
+            "CACHE_READ",
+            "CACHE_PUT",
+            "CACHE_REMOVE"
+          ]
+        },
+        "taskPerms": {
+          "*": [
+            "TASK_EXECUTE",
+            "TASK_CANCEL"
+          ]
+        },
+        "servicePerms": {
+          "*": [
+            "SERVICE_DEPLOY",
+            "SERVICE_CANCEL",
+            "SERVICE_INVOKE"
+          ]
+        },
+        "systemPerms": {
+          "*": [
+            "JOIN_AS_SERVER",
+            "CACHE_CREATE",
+            "ADMIN_CACHE",
+            "CACHE_DESTROY",
+            "ADMIN_OPS",
+            "ADMIN_VIEW",
+            "ADMIN_QUERY"
+          ]
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "MAINTENANCE_ADMIN",
+      "dfltAll": false,
+      "permissions": {
+        "cachePerms": {
+          "*": [
+            "CACHE_READ",
+            "CACHE_PUT",
+            "CACHE_REMOVE"
+          ]
+        },
+        "taskPerms": {
+          "com.sbt.security.ignite.core.storage.metastorage.administration.query.UserGetPermissionsTask": [
+            "TASK_EXECUTE"
+          ],
+          "org.apache.ignite.internal.commandline.cache.distribution.CacheDistributionTask": [
+            "TASK_EXECUTE"
+          ],
+          "com.sbt.security.ignite.core.storage.metastorage.administration.query.UserUpdatePasswordTask": [
+            "TASK_EXECUTE"
+          ],
+          "org.apache.ignite.internal.commandline.cache.reset_lost_partitions.CacheResetLostPartitionsTask": [
+            "TASK_EXECUTE"
+          ],
+          "org.apache.ignite.internal.processors.cache.verify.VerifyBackupPartitionsTaskV2": [
+            "TASK_EXECUTE"
+          ]
+        },
+        "servicePerms": {},
+        "systemPerms": {
+          "*": [
+            "CACHE_CREATE",
+            "ADMIN_CACHE",
+            "CACHE_DESTROY",
+            "ADMIN_OPS",
+            "ADMIN_VIEW",
+            "ADMIN_QUERY"
+          ]
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "ALLOW_ALL",
+      "dfltAll": true,
+      "permissions": {
+        "cachePerms": {},
+        "taskPerms": {},
+        "servicePerms": {},
+        "systemPerms": {}
+      }
+    },
+    {
+      "id": 4,
+      "name": "ROLE_WITHOUT_PERMS",
+      "dfltAll": false,
+      "permissions": {
+        "cachePerms": {},
+        "taskPerms": {},
+        "servicePerms": {},
+        "systemPerms": {}
+      }
+    },
+    {
+      "id": 5,
+      "name": "SHOULD_CHANGE_PASSWORD",
+      "dfltAll": false,
+      "permissions": {
+        "cachePerms": {},
+        "taskPerms": {
+          "com.sbt.security.ignite.core.storage.metastorage.administration.query.UserGetPermissionsTask": [
+            "TASK_EXECUTE"
+          ],
+          "com.sbt.security.ignite.core.storage.metastorage.administration.query.UserUpdatePasswordTask": [
+            "TASK_EXECUTE"
+          ]
+        },
+        "servicePerms": {},
+        "systemPerms": {}
+      }
     },
     {
       "id": 6,
-      "title": "json-server 6",
-      "author": "swift"
+      "name": "SECURITY_ADMIN",
+      "dfltAll": false,
+      "permissions": {
+        "cachePerms": {},
+        "taskPerms": {
+          "com.sbt.security.ignite.core.storage.metastorage.administration.query.*": [
+            "TASK_EXECUTE"
+          ]
+        },
+        "servicePerms": {},
+        "systemPerms": {}
+      }
     },
     {
-      "id": 9,
-      "title": "Если у нас не большое и простое приложение (что в реальности бывает редко), то можно не использовать type и всегда управлять обновлением reducer прямо из экшена.",
-      "author": "ytrytry0000"
+      "id": 7,
+      "name": "CLIENT",
+      "dfltAll": false,
+      "permissions": {
+        "cachePerms": {
+          "*": [
+            "CACHE_READ",
+            "CACHE_PUT",
+            "CACHE_REMOVE"
+          ]
+        },
+        "taskPerms": {
+          "*": [
+            "TASK_EXECUTE",
+            "TASK_CANCEL"
+          ]
+        },
+        "servicePerms": {
+          "*": [
+            "SERVICE_DEPLOY",
+            "SERVICE_CANCEL",
+            "SERVICE_INVOKE"
+          ]
+        },
+        "systemPerms": {
+          "*": [
+            "CACHE_CREATE",
+            "CACHE_DESTROY"
+          ]
+        }
+      }
     },
     {
-      "id": 10,
-      "title": "Давайте рассмотрим следующий пример",
-      "author": "IndexComponent"
+      "id": 8,
+      "name": "ADMIN_ACCESS",
+      "dfltAll": false,
+      "permissions": {
+        "cachePerms": {},
+        "taskPerms": {
+          "com.sbt.security.ignite.core.storage.metastorage.administration.query.*": [
+            "TASK_EXECUTE"
+          ]
+        },
+        "servicePerms": {},
+        "systemPerms": {}
+      }
     }
-  ],
-  "comments": [
-    {
-      "postId": "9",
-      "body": "Это самый простой пример, в котором мы просто обновляем записываем новые данные в плоский (без вложенности) reducer",
-      "id": 1
-    },
-    {
-      "postId": "9",
-      "body": "Бесплатная база данных телефонных кодов городов и операторов всего мира. Более 690,000 кодов.",
-      "id": 2
-    },
-    {
-      "postId": "9",
-      "body": "Компонент IndexComponent должен быть обязательно обернут в ContextApp.Provider",
-      "id": 3
-    },
-    {
-      "postId": "9",
-      "body": "Используя dispatch мы попадаем в reducer.js в метод testReducer ",
-      "id": 4
-    },
-    {
-      "postId": "1",
-      "body": "Используя dispatch мы попадаем в reducer.js в метод testReducer ",
-      "id": 5
-    },
-    {
-      "postId": "1",
-      "body": "Это самый простой пример, в котором мы просто обновляем записываем новые данные в плоский (без вложенности) reducer",
-      "id": 6
-    },
-    {
-      "postId": "9",
-      "body": "e654654654654",
-      "id": 7
-    },
-    {
-      "postId": "10",
-      "body": "An instant IDE and prototyping tool for rapid web development.\n",
-      "id": 8
-    },
-    {
-      "postId": "10",
-      "body": "Web Development Made Faster",
-      "id": 9
-    }
-  ],
-  "profile": {
-    "name": "App"
-  }
+  ]
 }

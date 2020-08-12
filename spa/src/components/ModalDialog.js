@@ -2,11 +2,11 @@ import React from 'react'
 import classnames from 'classnames'
 
 const ModalDialog = ({
-                         title = 'Title Modal Dialog',
+                         title = 'Title Dialog',
                          children = <div/>,
                          className = '',
                          colorScheme = '',
-                         onClose = Function
+                         onClose = () => console.log('ModalDialog onClose')
                      }) => {
     return (
         <div className="modal">
