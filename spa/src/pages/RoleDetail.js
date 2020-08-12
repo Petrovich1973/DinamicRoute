@@ -9,8 +9,12 @@ const RoleDetail = () => {
 
     const {
         name = '',
-        permissions = {}
+        permissions = {},
+        dfltAll = false
     } = role || {}
+
+    const isAllEmpty = !Object.keys(permissions)
+        .some(el => Object.keys(permissions[el]).length)
 
     const {id} = useParams()
 
@@ -42,10 +46,13 @@ const RoleDetail = () => {
             <h3>{name}</h3>
 
             {waiting && <div>waiting...</div>}
-            {role && <table className="table_detail_role">
+            {dfltAll && <div><p>Super Role</p></div>}
+            {isAllEmpty && <div><p>all rights, does not change</p></div>}
+            {role && !dfltAll && !isAllEmpty && <table className="table_detail_role">
                 <tbody>
                 {Object.keys(permissions).map((key, i) => {
                     const perm = permissions[key]
+                    console.log(perm && Object.keys(perm).length)
                     return (
                         <tr key={i}>
                             <td><strong>{key}</strong></td>
@@ -57,7 +64,11 @@ const RoleDetail = () => {
                                         return (
                                             <tr key={idTask}>
                                                 <td>
-                                                    <nobr>{keyTask === '*' ? 'for all classes' : keyTask}</nobr>
+                                                    <nobr>
+                                                        {keyTask === '*' ?
+                                                            'for all classes' :
+                                                            keyTask}
+                                                    </nobr>
                                                 </td>
                                                 <td>
                                                     {task.map((cache, idCache) => (
