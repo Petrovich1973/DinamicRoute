@@ -33,26 +33,51 @@ const Profile = () => {
 
     const useFilter = element => {
 
-        const isTest = key => {
+        const isTestText = key => {
             if (!filter[key].length) return 1
             return element[key].toLowerCase().includes(filter[key].toLowerCase())
         }
 
-        const isSelect = (key, def) => {
+        const isTestSelect = (key, def) => {
             if (filter[key] === def) return 1
             return element[key] === filter[key]
         }
 
-        const isList = key => {
+        const isTestList = key => {
             if (!filter[key].length) return 1
             return element[key].join().toLowerCase().includes(filter[key].toLowerCase())
         }
 
+        const isTestRange = key => {
+            if (!filter[key].length) return 1
+
+            const isNumber = v => !isNaN(v)
+
+            if(filter[key].length) {
+                const [first = '', second = ''] = filter[key].split(' ')
+
+                if(first !== '' && second !== '' && isNumber(first) && isNumber(second)) {
+                    return (
+                        Number(element[key]) >= Number(first) &&
+                        Number(element[key]) <= Number(second)
+                    )
+                }
+
+                if(first === '' && second !== '' && isNumber(second)) {
+                    return Number(element[key]) <= Number(second)
+                }
+
+                if(first !== '' && second === '' && isNumber(second)) {
+                    return Number(element[key]) >= Number(first)
+                }
+            }
+        }
+
         return (
-            isTest('name') &&
-            isTest('age') &&
-            isSelect('gender', 'noselect') &&
-            isList('skills')
+            isTestText('name') &&
+            isTestRange('age') &&
+            isTestSelect('gender', 'noselect') &&
+            isTestList('skills')
         )
 
     }
