@@ -49,25 +49,30 @@ const Profile = () => {
         }
 
         const isTestRange = key => {
-            if (!filter[key].length) return 1
+
+            const fieldValue = filter[key]//.replace(/\s+/g, ' ')
+
+            if (!fieldValue.length) return 1
 
             const isNumber = v => !isNaN(v)
 
-            if(filter[key].length) {
-                const [first = '', second = ''] = filter[key].split(' ')
+            if (fieldValue.length) {
+                const [first = '', second = ''] = fieldValue.split(' ')
 
-                if(first !== '' && second !== '' && isNumber(first) && isNumber(second)) {
+                if (first === '' && second === '') return 1
+
+                if (first !== '' && second !== '' && isNumber(first) && isNumber(second)) {
                     return (
                         Number(element[key]) >= Number(first) &&
                         Number(element[key]) <= Number(second)
                     )
                 }
 
-                if(first === '' && second !== '' && isNumber(second)) {
+                if (first === '' && second !== '' && isNumber(second)) {
                     return Number(element[key]) <= Number(second)
                 }
 
-                if(first !== '' && second === '' && isNumber(second)) {
+                if (first !== '' && second === '' && isNumber(second)) {
                     return Number(element[key]) >= Number(first)
                 }
             }
@@ -83,7 +88,7 @@ const Profile = () => {
     }
 
     const useSearch = element => {
-        if(!search.length) return 1
+        if (!search.length) return 1
         return JSON.stringify(element).includes(search)
     }
 
@@ -134,7 +139,7 @@ const Profile = () => {
                                 value={filter.age}
                                 onChange={e => setFilter({
                                     ...filter,
-                                    [e.target.name]: e.target.value
+                                    [e.target.name]: e.target.value.replace(/\s+/g, ' ')
                                 })}/>
                         </th>
                         <th>
@@ -164,7 +169,8 @@ const Profile = () => {
                         <th>
                             <button
                                 disabled={isEqualFilter}
-                                onClick={onReset}>Reset filter</button>
+                                onClick={onReset}>Reset filter
+                            </button>
                         </th>
                     </tr>
                     </thead>
