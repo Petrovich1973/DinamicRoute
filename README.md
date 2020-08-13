@@ -2,6 +2,6 @@
 
 ### START
 
-api /package.json - npm start
+api - /package.json - npm start
 
-web /spa/package.json - npm start
+web - /spa/package.json - npm start
