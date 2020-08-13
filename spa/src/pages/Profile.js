@@ -22,7 +22,6 @@ const options = [
 ]
 
 const Profile = () => {
-
     const [list, setList] = useState(initList)
     const [search, setSearch] = useState('')
     const [filter, setFilter] = useState(initFilter)
@@ -100,14 +99,19 @@ const Profile = () => {
                 Здесь инфрмация о пользователе
             </div>
             <div style={{height: 20}}/>
-            <div style={{width: 850, display: 'inline-block'}}>
+            <div className="search">
                 <input
                     autoComplete={'off'}
-                    style={{width: '100%'}}
+                    style={{width: '100%', paddingRight: '2rem'}}
                     type="text"
                     name="search"
                     value={search}
                     onChange={e => setSearch(e.target.value)}/>
+                {search && <span
+                    title="clear search"
+                    className="search__clear"
+                    onClick={() => setSearch('')}
+                    style={{width: '2rem'}}>&#10005;</span>}
             </div>
             <div style={{height: 20}}/>
             <div>
