@@ -57,6 +57,11 @@ const Profile = () => {
 
     }
 
+    const useSearch = element => {
+        if(!search.length) return 1
+        return JSON.stringify(element).includes(search)
+    }
+
     return (
         <section className="align-center">
             <h3>Profile</h3>
@@ -139,7 +144,7 @@ const Profile = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {list.filter(useFilter).map((row, idRow) => (
+                    {list.filter(useFilter).filter(useSearch).map((row, idRow) => (
                         <tr key={idRow}>
                             {Object.keys(row).map((key, idTd) => {
                                 const value = row[key]
