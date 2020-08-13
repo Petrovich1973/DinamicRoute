@@ -52,10 +52,10 @@ const RoleDetail = () => {
                 <tbody>
                 {Object.keys(permissions).map((key, i) => {
                     const perm = permissions[key]
-                    console.log(perm && Object.keys(perm).length)
+                    const rowSpan = perm && Object.keys(perm).length
                     return (
                         <tr key={i}>
-                            <td><strong>{key}</strong></td>
+                            <td rowSpan={1}><strong>{key}</strong></td>
                             <td>
                                 <table>
                                     <tbody>
