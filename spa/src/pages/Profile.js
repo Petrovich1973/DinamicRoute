@@ -31,16 +31,27 @@ const Profile = () => {
     const useFilter = element => {
 
         const isTest = key => {
-            if(!filter[key].length) return 1
+            if (!filter[key].length) return 1
             return element[key].toLowerCase().includes(filter[key].toLowerCase())
         }
 
         const isSelect = (key, def) => {
-            if(filter[key] === def) return 1
+            if (filter[key] === def) return 1
             return element[key] === filter[key]
         }
 
-        return isTest('name') && isTest('age') && isSelect('gender', 'noselect')
+        const isList = key => {
+            if (!filter[key].length) return 1
+            return element[key].join().toLowerCase().includes(filter[key].toLowerCase())
+        }
+
+        return (
+            isTest('name') &&
+            isTest('age') &&
+            isSelect('gender', 'noselect') &&
+            isList('skills')
+        )
+
     }
 
     return (
@@ -117,7 +128,9 @@ const Profile = () => {
                                     [e.target.name]: e.target.value
                                 })}/>
                         </th>
-                        <th><button onClick={onReset}>Reset filter</button></th>
+                        <th>
+                            <button onClick={onReset}>Reset filter</button>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
