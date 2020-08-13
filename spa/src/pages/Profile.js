@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import equal from 'equals'
 
 const initList = [
     {name: 'Alex', age: '23', gender: 'male', skills: ['javascript']},
@@ -27,6 +28,8 @@ const Profile = () => {
     const [filter, setFilter] = useState(initFilter)
 
     const onReset = () => setFilter(initFilter)
+
+    const isEqualFilter = equal(initFilter, filter)
 
     const useFilter = element => {
 
@@ -129,7 +132,9 @@ const Profile = () => {
                                 })}/>
                         </th>
                         <th>
-                            <button onClick={onReset}>Reset filter</button>
+                            <button
+                                disabled={isEqualFilter}
+                                onClick={onReset}>Reset filter</button>
                         </th>
                     </tr>
                     </thead>

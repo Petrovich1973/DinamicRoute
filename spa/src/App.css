@@ -106,7 +106,7 @@ hr {
 }
 
 [disabled] {
-    cursor: wait;
+    cursor: not-allowed	;
 }
 
 .word-wrap {
