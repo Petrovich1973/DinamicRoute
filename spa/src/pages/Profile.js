@@ -73,6 +73,7 @@ const Profile = () => {
                 }
 
                 if (first !== '' && second === '' && isNumber(second)) {
+                    if(fieldValue.split(' ').length === 1) return Number(element[key]) === Number(first)
                     return Number(element[key]) >= Number(first)
                 }
             }
