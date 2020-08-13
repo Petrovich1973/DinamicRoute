@@ -40,7 +40,7 @@ const RoleDetail = () => {
         // eslint-disable-next-line
     }, [])
 
-    const renderCels = (keyTask, task) => {
+    const renderCells = (keyTask, task) => {
         return (
             <>
                 <td>
@@ -83,7 +83,7 @@ const RoleDetail = () => {
                                 const task = perm[keyTask]
                                 return (
                                     <React.Fragment key={idTask}>
-                                        {renderCels(keyTask, task)}
+                                        {renderCells(keyTask, task)}
                                     </React.Fragment>
                                 )
                             })}
@@ -92,7 +92,7 @@ const RoleDetail = () => {
                             const task = perm[keyTask]
                             return (
                                 <tr key={idTask}>
-                                    {renderCels(keyTask, task)}
+                                    {renderCells(keyTask, task)}
                                 </tr>
                             )
                         })}
