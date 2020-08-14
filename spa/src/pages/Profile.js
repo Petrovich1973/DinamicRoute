@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import equal from 'equals'
+import {useFilter} from "../useHooks/useFilter"
 
 const initList = [
     {name: 'Alex', age: '23', gender: 'male', skills: ['javascript']},
@@ -8,11 +9,24 @@ const initList = [
     {name: 'Alla', age: '18', gender: 'female', skills: ['javascript', 'html', 'css']}
 ]
 
-const initFilter = {
-    name: '',
-    age: '',
-    gender: 'noselect',
-    skills: ''
+const initialFilter = {
+    name: {
+        value: "",
+        type: "text"
+    },
+    age: {
+        value: "",
+        type: "range"
+    },
+    gender: {
+        value: "noselect",
+        type: "select",
+        defaultValue: "noselect"
+    },
+    skills: {
+        value: "",
+        type: "text"
+    }
 }
 
 const options = [
@@ -24,67 +38,18 @@ const options = [
 const Profile = () => {
     const [list, setList] = useState(initList)
     const [search, setSearch] = useState('')
-    const [filter, setFilter] = useState(initFilter)
+    const [filter, setFilter] = useState(initialFilter)
+    const resultFilter = useFilter({list, filter})
 
-    const onReset = () => setFilter(initFilter)
+    const onReset = () => setFilter(initialFilter)
 
-    const isEqualFilter = equal(initFilter, filter)
+    const isEqualFilter = equal(initialFilter, filter)
 
-    const useFilter = element => {
-
-        const isTestText = key => {
-            if (!filter[key].length) return 1
-            return element[key].toLowerCase().includes(filter[key].toLowerCase())
-        }
-
-        const isTestSelect = (key, def) => {
-            if (filter[key] === def) return 1
-            return element[key] === filter[key]
-        }
-
-        const isTestList = key => {
-            if (!filter[key].length) return 1
-            return element[key].join().toLowerCase().includes(filter[key].toLowerCase())
-        }
-
-        const isTestRange = key => {
-
-            const fieldValue = filter[key]//.replace(/\s+/g, ' ')
-
-            if (!fieldValue.length) return 1
-
-            const isNumber = v => !isNaN(v)
-
-            if (fieldValue.length) {
-                const [first = '', second = ''] = fieldValue.split(' ')
-
-                if (first === '' && second === '') return 1
-
-                if (first !== '' && second !== '' && isNumber(first) && isNumber(second)) {
-                    return (
-                        Number(element[key]) >= Number(first) &&
-                        Number(element[key]) <= Number(second)
-                    )
-                }
-
-                if (first === '' && second !== '' && isNumber(second)) {
-                    return Number(element[key]) <= Number(second)
-                }
-
-                if (first !== '' && second === '' && isNumber(second)) {
-                    if (fieldValue.split(' ').length === 1) return Number(element[key]) === Number(first)
-                    return Number(element[key]) >= Number(first)
-                }
-            }
-        }
-
-        return (
-            isTestText('name') &&
-            isTestRange('age') &&
-            isTestSelect('gender', 'noselect') &&
-            isTestList('skills')
-        )
-
+    const onChangeFilter = e => {
+        setFilter({
+            ...filter,
+            [e.target.name]: {...filter[e.target.name], value: e.target.value}
+        })
     }
 
     const useSearch = element => {
@@ -130,31 +95,22 @@ const Profile = () => {
                                 autoComplete={'off'}
                                 type="text"
                                 name="name"
-                                value={filter.name}
-                                onChange={e => setFilter({
-                                    ...filter,
-                                    [e.target.name]: e.target.value
-                                })}/>
+                                value={filter.name.value}
+                                onChange={onChangeFilter}/>
                         </th>
                         <th>
                             <input
                                 autoComplete={'off'}
                                 type="text"
                                 name="age"
-                                value={filter.age}
-                                onChange={e => setFilter({
-                                    ...filter,
-                                    [e.target.name]: e.target.value.replace(/\s+/g, ' ')
-                                })}/>
+                                value={filter.age.value}
+                                onChange={onChangeFilter}/>
                         </th>
                         <th>
                             <select
                                 name="gender"
-                                value={filter.gender}
-                                onChange={e => setFilter({
-                                    ...filter,
-                                    [e.target.name]: e.target.value
-                                })}>
+                                value={filter.gender.value}
+                                onChange={onChangeFilter}>
                                 {options.map((op, i) => (
                                     <option key={i} value={op.value}>{op.label}</option>
                                 ))}
@@ -165,11 +121,8 @@ const Profile = () => {
                                 autoComplete={'off'}
                                 type="text"
                                 name="skills"
-                                value={filter.skills}
-                                onChange={e => setFilter({
-                                    ...filter,
-                                    [e.target.name]: e.target.value
-                                })}/>
+                                value={filter.skills.value}
+                                onChange={onChangeFilter}/>
                         </th>
                         <th>
                             <button
@@ -180,7 +133,7 @@ const Profile = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {list.filter(useFilter).filter(useSearch).map((row, idRow) => (
+                    {resultFilter.filter(useSearch).map((row, idRow) => (
                         <tr key={idRow}>
                             {Object.keys(row).map((key, idTd) => {
                                 const value = row[key]
